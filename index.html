@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tebak Roso</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff758c, #ff7eb3);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    .game-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px;
+      border-radius: 20px;
+      text-align: center;
+      max-width: 400px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      border: none;
+      border-radius: 30px;
+      background: #fff;
+      color: #ff4f8b;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 1.2em;
+    }
+
+    .watermark {
+      position: absolute;
+      bottom: 10px;
+      right: 15px;
+      font-size: 0.8em;
+      color: rgba(255, 255, 255, 0.4);
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Tebak Roso</h1>
+    <p id="question">Apakah dia sering melihat kamu diam-diam?</p>
+    
+    <div class="buttons">
+      <button onclick="jawab(true)">hooh</button>
+      <button onclick="jawab(false)">ora</button>
+    </div>
+
+    <p id="result"></p>
+  </div>
+
+  <div class="watermark">Cepe (Cahyo Projek)</div>
+
+  <script>
+    const pertanyaan = [
+      "Apakah dia sering melihat kamu diam-diam?",
+      "Apakah dia suka senyum ke kamu tanpa alasan?",
+      "Apakah dia suka deketin kamu terus?",
+      "Apakah dia pernah nyebut nama kamu waktu ngelamun?",
+      "Apakah dia bales chat kamu dengan cepat?"
+    ];
+
+    let index = 0;
+    let nilai = 0;
+
+    function jawab(pilihan) {
+      if (pilihan) nilai++;
+      index++;
+
+      if (index < pertanyaan.length) {
+        document.getElementById("question").textContent = pertanyaan[index];
+      } else {
+        tampilHasil();
+      }
+    }
+
+    function tampilHasil() {
+      const hasil = document.getElementById("result");
+      const pertanyaanElemen = document.getElementById("question");
+      pertanyaanElemen.style.display = "none";
+      document.querySelector(".buttons").style.display = "none";
+
+      if (nilai >= 4) {
+        hasil.innerHTML = "wonge seneng ro koe <br> pengen kenthu ro koe";
+      } else if (nilai >= 2) {
+        hasil.innerHTML = "Mungkin ada rasa, tapi kamu harus lebih deket lagi.";
+      } else {
+        hasil.innerHTML = "wonge ra seneng koe kon piye meneh";
+      }
+    }
+  </script>
+</body>
+</html>
